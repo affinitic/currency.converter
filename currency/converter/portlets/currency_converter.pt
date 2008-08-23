@@ -15,7 +15,7 @@
 
     <span i18n:translate="In this site...">In this site...</span>
     <form method="post"
-          tal:attributes="action context/absolute_url">
+          tal:attributes="action view/current_url">
       <div class="portletContent">
 
       <input type="text" size="7" name="base_currency_rate"

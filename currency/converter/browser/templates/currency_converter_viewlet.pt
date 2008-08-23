@@ -1,13 +1,6 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
-      xmlns:tal="http://xml.zope.org/namespaces/tal"
-      xmlns:metal="http://xml.zope.org/namespaces/metal"
-      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      lang="en"
-      metal:use-macro="context/main_template/macros/master"
-      i18n:domain="currency.converter">
-  <body>
-    <metal:main fill-slot="main">
-<!--
+<!-- Currency Converter Viewlet -->
+<div i18n:domain="currency.converter">
+
     <h1 i18n:translate="Currency Converter">Currency Converter</h1>
     <p tal:condition="not:view/currency_data" 
        i18n:translate="no_currency_data_available">
@@ -23,7 +16,7 @@
     <h2 i18n:translate="">Convert the currency...</h2>
 
     <form method="post"
-          tal:attributes="action string:${context/absolute_url}/${view/__name__}">
+          tal:attributes="action view/view_url">
 
       <input type="text" size="7" name="base_currency_rate"
                      tal:attributes="value view/base_currency_rate" />
@@ -67,9 +60,4 @@
     </p>
 
     </div>
--->
-<div tal:replace="structure provider:currency.converter.viewletManager" />
-
-    </metal:main>
-  </body>
-</html>
+</div>

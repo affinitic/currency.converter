@@ -1,12 +1,12 @@
 from setuptools import setup, find_packages
 
-version = '0.0.1'
+version = '0.2.0'
 
 setup(name='currency.converter',
       version=version,
       description="Currency Converter",
       long_description="""\
-Converts currency derived from European central bank.""",
+Converts currency derived from European Central Bank.""",
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         "Framework :: Plone",

@@ -4,6 +4,7 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="currency.converter">
 
+    <!-- Register pages -->
 
     <browser:page
       for="Products.CMFCore.interfaces.ISiteRoot"
@@ -18,5 +19,23 @@
       class=".currency_converter.CurrencyConverterView"
       permission="zope2.View"
       />
+
+    <!-- Register viewlet managers -->
+
+    <browser:viewletManager
+        name="currency.converter.viewletManager"
+        provides=".viewlet_manager.ICurrencyConverter"
+        permission="zope2.View"
+        class="plone.app.viewletmanager.manager.BaseOrderedViewletManager"
+        />
+
+    <!-- Register viewlets -->
+
+     <browser:viewlet
+         name="currency.converter.viewlet"
+         manager=".viewlet_manager.ICurrencyConverter"
+         class=".currency_converter_viewlet.CurrencyConverterViewlet"
+         permission="zope2.View"
+         />
 
 </configure>
