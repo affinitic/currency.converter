@@ -1,5 +1,4 @@
 README.txt
-setup.cfg
 setup.py
 currency/__init__.py
 currency.converter.egg-info/PKG-INFO
@@ -19,8 +18,11 @@ currency/converter/interfaces.py
 currency/converter/browser/__init__.py
 currency/converter/browser/configure.zcml
 currency/converter/browser/currency_converter.py
+currency/converter/browser/currency_converter_viewlet.py
 currency/converter/browser/currency_manager.py
+currency/converter/browser/viewlet_manager.py
 currency/converter/browser/templates/currency_converter.pt
+currency/converter/browser/templates/currency_converter_viewlet.pt
 currency/converter/browser/templates/currency_manager.pt
 currency/converter/locales/currency.converter.pot
 currency/converter/locales/en/LC_MESSAGES/currency.converter.po
