@@ -126,7 +126,7 @@ class Renderer(base.Renderer, CurrencyConverterViewlet):
         else:
             return False
 
-    def link_to_currency_list(self):
+    def link_to_currency_converter(self):
         portal_state = getMultiAdapter((self.context, self.request), name=u'plone_portal_state')
         portal_url = portal_state.portal_url()
         return '%s/@@currency-converter' % portal_url

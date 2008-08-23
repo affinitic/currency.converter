@@ -5,7 +5,7 @@
   <dt class="portletHeader">
     <span class="portletTopLeft"></span>
     <a href="#"
-       tal:attributes="href view/link_to_currency_list"
+       tal:attributes="href view/link_to_currency_converter"
        i18n:translate="Currency Converter">Currency Converter</a>
     <span class="portletTopRight"></span>
   </dt>
@@ -67,7 +67,7 @@
   <dd class="portletFooter">
     <span class="portletBottomLeft"></span>
       <a href="#"
-         tal:attributes="href view/link_to_currency_list"
+         tal:attributes="href view/link_to_currency_converter"
          i18n:translate="Check Currencies">Check Currencies</a>
       <span class="portletBottomRight"></span>
   </dd>
