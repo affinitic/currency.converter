@@ -1,0 +1,22 @@
+<!-- Currency Converter Browser configures. -->
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="currency.converter">
+
+
+    <browser:page
+      for="Products.CMFCore.interfaces.ISiteRoot"
+      name="manage-currency"
+      class=".currency_manager.CurrencyManagerView"
+      permission="cmf.ManagePortal"
+      />
+
+    <browser:page
+      for="Products.CMFCore.interfaces.ISiteRoot"
+      name="currency-converter"
+      class=".currency_converter.CurrencyConverterView"
+      permission="zope2.View"
+      />
+
+</configure>
