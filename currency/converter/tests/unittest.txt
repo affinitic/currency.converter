@@ -65,5 +65,3 @@ Creat Mock object for testing BrowserView
 
     >>> from currency.converter.browser.currency_manager import CurrencyManagerView
     >>> view = CurrencyManagerView(context, None)
-
-
