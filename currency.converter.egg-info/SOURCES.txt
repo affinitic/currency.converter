@@ -1,4 +1,5 @@
 README.txt
+setup.cfg
 setup.py
 currency/__init__.py
 currency.converter.egg-info/PKG-INFO
@@ -40,6 +41,7 @@ currency/converter/tests/base.py
 currency/converter/tests/functional.txt
 currency/converter/tests/integration.txt
 currency/converter/tests/test_doctest.py
+currency/converter/tests/test_portlet_currency_converter.py
 currency/converter/tests/test_setup.py
 currency/converter/tests/unittest.txt
 docs/HISTORY.txt

@@ -13,11 +13,6 @@
                  interface=".currency_converter.ICurrencyConverterPortlet"
                  assignment=".currency_converter.Assignment"
                  renderer=".currency_converter.Renderer"
-                 addview=".currency_converter.AddForm"
-                 editview=".currency_converter.EditForm" />
-<!--
-  <utility
-    component=".currency_converter.CurrencyCodeNameVocabularyFactory"
-    name="currency.converter.CurrencyCodeName" />
--->
+                 addview=".currency_converter.AddForm" />
+
 </configure>

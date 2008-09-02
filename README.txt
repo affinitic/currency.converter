@@ -3,7 +3,7 @@ currency.converter Package Readme
 
 Overview
 -----------
-currency.converter package fetches currency rate data from European Central Bank for about recent 90 days. Once the data is fetched the data is conserved in ZODB in case of whatever difficulty to fetch the data again. There are currency converter page and portlet included in this package and serveral methods you can use for your own applications.
+currency.converter package fetches currency rate data from European Central Bank for about recent 90 days. Once the data is fetched the data is conserved in ZODB in case of whatever difficulty to fetch the data again. There are currency converter page and portlet included in this package and several methods you can use for your own applications.
 
 This package is developed for plone-3.x.
 
@@ -26,6 +26,25 @@ This amout is used to caclulate average of currencies. For example, if you input
 -Margin
 Margin adds % of rate to the currency rate. 0 is 0 % margin where is no margin.
 
+-------------------------
+Setting Time Server
+-------------------------
+To fetch the currency data every day, describe the next to the instance section of buildout.cfg.
+
+[instance]
+zope-conf-additional =
+    <clock-server>
+      method /your_portal/@@manage-currency
+      period 86400
+      user admin
+      password admin_pass
+      host localhost
+    </clock-server>
+
+* Change your_portal to your plone site id
+* Period is seconds between eache fetch of the currency data. 86400 seconds are the 24 hour. The data is usually updated daily on week days.
+* Describe admin name to admin and its password to admin_pass.
+* host is host name of your server.
 
 --------------------------------
 Upgrading of reinstalling
