@@ -3,7 +3,7 @@ currency.converter Package Readme
 
 Overview
 -----------
-currency.converter package fetches currency rate data from European Central Bank for about recent 90 days. Once the data is fetched the data is conserved in ZODB in case of whatever difficulty to fetch the data again. There are currency converter page and portlet included in this package and several methods you can use for your own applications.
+currency.converter package fetches currency rate data from European Central Bank for about recent 3 months. Once the data is fetched the data is conserved in ZODB in case of whatever difficulty to fetch the data again. There are currency converter page and portlet included in this package and several methods you can use for your own applications.
 
 This package is developed for plone-3.x.
 
@@ -29,7 +29,7 @@ Margin adds % of rate to the currency rate. 0 is 0 % margin where is no margin.
 -------------------------
 Setting Time Server
 -------------------------
-To fetch the currency data every day, describe the next to the instance section of buildout.cfg.
+To fetch the currency data regularly like every day, describe to the instance section of buildout.cfg the next way.
 
 [instance]
 zope-conf-additional =
@@ -49,10 +49,11 @@ zope-conf-additional =
 --------------------------------
 Upgrading of reinstalling
 --------------------------------
-When you reinstall or upgrade to new version, the persisted data is not migrated to new environment, so please visit your_portal/@@manage-currency to get the current data.
+When you reinstall or upgrade to new version, the persisted data is not migrated to new environment, so please visit your_portal/@@manage-currency to get the current data or if you have set the time server, you can wait the fetch time to come.
 
-------
-ToDo
-------
--Implement daily fetch of currency data automatically by using zope time server. Must be easy, but not tested yet.
+------------------------------
+Tested version of Plone
+------------------------------
+-3.1.4
+-3.1.5.1
 

@@ -17,19 +17,6 @@ class CurrencyData(Persistent):
     def currency_data(self):
         """Returns the most recent currency data with tuples."""
         etree90 = ElementTree()
-#        data90 = urllib2.urlopen('http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml')
-#        root90 = ElementTree.parse(etree90, data90)
-#        DATA90 = root90[2]
-#        DATA_list = []
-#        for DATA in DATA90:
-#            daily_data_list = []
-#            for daily_data in DATA:
-#                daily_data_tuple = (daily_data.get('currency'), daily_data.get('rate'))
-#                daily_data_list.append(daily_data_tuple)
-#            ddl = (DATA.get('time'), dict(daily_data_list))
-#            DATA_list.append(ddl)
-#        return DATA_list
-
         try:
             data90 = urllib2.urlopen('http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml')
             root90 = ElementTree.parse(etree90, data90)
@@ -46,9 +33,61 @@ class CurrencyData(Persistent):
         except:
             return False
 
+    def currency_data_list(self):
+        """Returns the most recent currency data as a list of dictionaries.
+        ex)
+        [
+            {
+            code: "EUR",
+            rate: ['156.05', '160.25', ...],
+            name: u"Euro",
+            unit: u"\u20ac"
+            },
+            {...},{...},...
+        ]
+        """
+        if self.currencies != None:
+            daily_data_list = [daily_data[1] for daily_data in self.currencies]
+            results = []
+            for code in self.currency_codes():
+                rate_list = [d.get(code) for d in daily_data_list if d.get(code) != None]
+                try:
+                    if code == "EUR":
+                        results.append(
+                    {
+                    'code': code, 
+                    'rate': [1],
+                    'name': currencies.get(code)[0],
+                    'unit': currencies.get(code)[1],
+                    'decimal' : currencies.get(code)[2],
+                    }
+                    )
+                    else:
+                        results.append(
+                    {
+                    'code': code, 
+                    'rate': rate_list,
+                    'name': currencies.get(code)[0],
+                    'unit': currencies.get(code)[1],
+                    'decimal' : currencies.get(code)[2],
+                    }
+                    )
+                except:
+                    results.append(
+                    {
+                    'code': code, 
+                    'rate': rate_list,
+                    'name': currencies.get(code)[0],
+                    'unit': currencies.get(code)[1],
+                    'decimal' : 2,
+                    }
+                    )
+            return results
+        else:
+            return False
+
     def updated_date(self):
         """Returns updated date."""
-#        return self.currency_data()[0][0]
         if self.currencies != None:
             return self.currencies[0][0]
         else:
@@ -65,8 +104,7 @@ class CurrencyData(Persistent):
         return codes
 
     def currency_code_tuples(self):
-        """Returns currency code and description tuples."""
-#        if self.currency_codes() != False:
+        """Returns currency code and its tuples."""
         results = []
         for code in self.currency_codes():
             t = (code, currencies[code])
@@ -77,10 +115,8 @@ class CurrencyData(Persistent):
         """Returns dictionary of currency code and rate list."""
         if self.currencies != None:
             currency_data_withought_date = []
-#        for data in self.currency_data():
             for data in self.currencies:
                 currency_data_withought_date.append(data[1])
-#            r = []
             r = {}
             for code in self.currency_codes():
                 results = []
@@ -88,19 +124,16 @@ class CurrencyData(Persistent):
                     for key in data.keys():
                         if code == key:
                             results.append(data[key])
-#                r.append({code:results})
                 r.update({code:results})
             return r
         else:
             return False
 
     def currency_code_average(self, days):
-        """Returns code and average"""
+        """Returns code and average rate of days."""
         if self.currencies != None:
             results = {}
             for (code, L) in self.currency_code_data().items():
-#            length = len(L)
-#            results.update({code:length})
                 if code == 'EUR':
                     rate = 1
                     results.update({code:rate})
@@ -159,3 +192,18 @@ class CurrencyData(Persistent):
             return results
         else:
             return False
+
+    def currency_rate(self, days=1, margin=0, base_currency_code="EUR", base_rate=1, currency_code="USD", currency_rate=10):
+        """Returns calculated currency rate."""
+        if base_currency_code == "EUR":
+            for cd in self.currency_data_list():
+                if cd['code'] == currency_code:
+                    rates = cd['rate']
+                    decimal = cd['decimal']
+                    break
+#        if base_currency_code != "EUR":
+#            
+#        if days > len(rate):
+#            days = len(rate)
+#        rates = [float(r) for r in rates[:days]]
+#        return sum(rates) / days * (100 + float(margin)) / 100 * base_rate

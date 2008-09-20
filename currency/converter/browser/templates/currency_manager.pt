@@ -17,15 +17,6 @@
     <form method="post"
             tal:attributes="action string:${context/absolute_url}/${view/__name__}">
 
-<!--
-      <input class="context"
-             type="submit"
-             id="form.button.GetCurrency"
-             value="Get Currency"
-             name="form.button.GetCurrency"
-             i18n:attributes="value"/>
--->
-
       <input class="context"
              type="submit"
              id="form.button.Update"

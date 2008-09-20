@@ -10,7 +10,6 @@ from currency.converter import CurrencyConverterMessageFactory as _
 from zope.component import (getMultiAdapter,
                             getUtility)
 from currency.converter.interfaces import ICurrencyData
-#from currency.converter.currencies import currencies
 
 class CurrencyConverterViewlet(ViewletBase):
 
