@@ -595,7 +595,7 @@ msgstr "ポーランドズロチ"
 
 #: currency/converter/currencies.py:60
 msgid "Pound Sterling"
-msgstr ""
+msgstr "英ポンド"
 
 #: currency/converter/currencies.py:130
 msgid "Qatari Riyal"
@@ -672,7 +672,7 @@ msgstr "南アフリカランド"
 
 #: currency/converter/currencies.py:88
 msgid "South Korean Won"
-msgstr ""
+msgstr "韓国ウォン"
 
 #: currency/converter/currencies.py:179
 msgid "Special Drawing Right"
