@@ -8,7 +8,6 @@ currency.converter.egg-info/dependency_links.txt
 currency.converter.egg-info/entry_points.txt
 currency.converter.egg-info/namespace_packages.txt
 currency.converter.egg-info/not-zip-safe
-currency.converter.egg-info/paster_plugins.txt
 currency.converter.egg-info/requires.txt
 currency.converter.egg-info/top_level.txt
 currency/converter/__init__.py
