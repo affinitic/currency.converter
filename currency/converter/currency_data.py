@@ -1,9 +1,11 @@
 from persistent import Persistent
 from zope.interface import implements
-from currency.converter.interfaces import ICurrencyData
+from currency.converter.interfaces import ICurrencyData, IRateAgainstBaseRate
 from elementtree.ElementTree import XML, ElementTree, Element
 import urllib2
 from currencies import currencies
+
+from zope.component import getUtility
 
 class CurrencyData(Persistent):
     implements(ICurrencyData)
@@ -201,9 +203,21 @@ class CurrencyData(Persistent):
                     rates = cd['rate']
                     decimal = cd['decimal']
                     break
-#        if base_currency_code != "EUR":
-#            
-#        if days > len(rate):
-#            days = len(rate)
-#        rates = [float(r) for r in rates[:days]]
-#        return sum(rates) / days * (100 + float(margin)) / 100 * base_rate
+
+
+class RateAgainstBaseRate(object):
+    """A component which provides rate agains base currency rate."""
+
+    implements(IRateAgainstBaseRate)
+
+    def __call__(self, base_currency_rate, base_currency_code, currency_code):
+        """Returns currency rate for base currency rate, margin and days."""
+        currency_data = getUtility(ICurrencyData)
+        days = currency_data.selected_days
+        margin = currency_data.margin
+        currency_dictionary = currency_data.currency_rate_against_base_code_with_margin(days, base_currency_code, margin)
+        if base_currency_code != currency_code:
+            result = currency_dictionary[currency_code] * base_currency_rate
+            return '%.2f' %result
+        else:
+            return None

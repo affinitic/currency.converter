@@ -10,6 +10,11 @@ CurrencyData
     >>> ICurrencyData.providedBy(currency_data)
     True
 
+Register CurrencyData utility as ICurrencyData interface
+------------------------------------------------------------------------
+    >>> from zope.component import getUtility, provideUtility
+    >>> provideUtility(currency_data, provides=ICurrencyData)
+
 Check Methods withought any currency data.
 --------------------------------------------------
     >>> currency_data.updated_date()
@@ -57,3 +62,16 @@ Check Methods with currency data.
     >>> currency_data.currency_rate_against_base_code_with_margin(2, 'USD', 5.00).get('JPY') == currency_data.currency_rate_against_base_code(2, 'USD').get('JPY') * (100 + 5.00) / 100
     True
     >>> currency_data.currency_rate(2, 5.0, 'EUR', currency_data.currency_code_average(2).get('EUR'), u'USD', currency_data.currency_code_average(2).get('USD') )
+
+-----------------
+Utility tests
+-----------------
+    >>> from currency.converter.interfaces import IRateAgainstBaseRate
+    >>> from currency.converter.currency_data import RateAgainstBaseRate
+    >>> rabr = RateAgainstBaseRate()
+    >>> provideUtility(rabr, provides=IRateAgainstBaseRate)
+    >>> rabru = getUtility(IRateAgainstBaseRate)
+    >>> rabru(1, "EUR", "USD")
+    '1.47'
+    >>> rabru(1, "EUR", "EUR")
+    

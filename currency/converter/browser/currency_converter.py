@@ -10,7 +10,7 @@ from currency.converter import CurrencyConverterMessageFactory as _
 #from zope.component import getMultiAdapter
 from zope.component import getUtility
 
-from currency.converter.interfaces import ICurrencyData
+from currency.converter.interfaces import ICurrencyData, IRateAgainstBaseRate
 
 class CurrencyConverterView(BrowserView):
     """View for currency manager."""
@@ -77,11 +77,5 @@ class CurrencyConverterView(BrowserView):
 
     def calculated_rate_against_base_rate(self, base_currency_rate, base_currency_code, currency_code):
         """Returns calculated rate against base currency rate."""
-        currency_data = getUtility(ICurrencyData)
-        days = currency_data.selected_days
-        margin = currency_data.margin
-        currency_dictionary = currency_data.currency_rate_against_base_code_with_margin(days, base_currency_code, margin)
-        result = currency_dictionary[currency_code] * base_currency_rate
-        return '%.2f' %result
-#        return currency_dictionary[currency_code]
-#        return currency_dictionary["USD"]
+        rate = getUtility(IRateAgainstBaseRate)
+        return rate

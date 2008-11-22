@@ -1,6 +1,4 @@
-#from zope.interface import Attribute
 from zope.interface import Interface
-#from zope.schema import Container
 
 from currency.converter import CurrencyConverterMessageFactory as _
 
@@ -50,3 +48,8 @@ class ICurrencyData(Interface):
 
     def currency_rate(days, margin, base_currency_code, base_rate, currency_code, currency_rate):
         """Returns calculated currency rate."""
+
+class IRateAgainstBaseRate(Interface):
+    """A component which provides member's currency."""
+    def __call__(base_currency_rate, base_currency_code, currency_code):
+        """Returns currency rate for base currency rate, margin and days."""
