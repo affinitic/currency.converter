@@ -7,10 +7,13 @@ from Products.CMFCore.utils import getToolByName
 
 from currency.converter import CurrencyConverterMessageFactory as _
 
-#from zope.component import getMultiAdapter
 from zope.component import getUtility
 
-from currency.converter.interfaces import ICurrencyData, IRateAgainstBaseRate
+from currency.converter.interfaces import (
+                                            ICurrencyData,
+                                            IRateAgainstBaseRate,
+                                            ICurrencyCodeName,
+                                            )
 
 class CurrencyConverterView(BrowserView):
     """View for currency manager."""
@@ -34,16 +37,11 @@ class CurrencyConverterView(BrowserView):
         self.selected_base_currency = currency_data.selected_base_currency
         self.selected_days = currency_data.selected_days
         self.margin = currency_data.margin
-#        self.currencies = currency_data.currency_rate_against_base_code_with_margin(int(self.selected_days), self.selected_currency, self.margin)
 
         try:
             self.base_currency_rate = form.get('base_currency_rate', 1)
         except:
             self.base_currency_rate = 1
-#        try:
-#            self.base_currency = form.get('base_currency', 'EUR')
-#        except:
-#            self.base_currency = 'EUR'
         try:
             self.selected_base_currency_code = form.get('base_currency_code', self.selected_base_currency)
         except:
@@ -79,3 +77,6 @@ class CurrencyConverterView(BrowserView):
         """Returns calculated rate against base currency rate."""
         rate = getUtility(IRateAgainstBaseRate)
         return rate
+
+    def currencies(self):
+        return getUtility(ICurrencyCodeName)()

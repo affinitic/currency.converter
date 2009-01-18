@@ -35,6 +35,7 @@ currency/converter/profiles/default/componentregistry.xml
 currency/converter/profiles/default/controlpanel.xml
 currency/converter/profiles/default/metadata.xml
 currency/converter/profiles/default/portlets.xml
+currency/converter/profiles/default/propertiestool.xml
 currency/converter/tests/__init__.py
 currency/converter/tests/base.py
 currency/converter/tests/functional.txt

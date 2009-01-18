@@ -23,4 +23,7 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
     />
 
+    <utility factory=".currency_data.CurrencyCodeName" />
+    <utility factory=".currency_data.CurrencyCodeNameTuples" />
+
 </configure>

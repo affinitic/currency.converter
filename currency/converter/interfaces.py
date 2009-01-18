@@ -53,3 +53,11 @@ class IRateAgainstBaseRate(Interface):
     """A component which provides member's currency."""
     def __call__(base_currency_rate, base_currency_code, currency_code):
         """Returns currency rate for base currency rate, margin and days."""
+
+class ICurrencyCodeName(Interface):
+    def __call__():
+        """Returns list of dictionaries for currency code and name."""
+
+class ICurrencyCodeNameTuples(Interface):
+    def __call__():
+        """Returns tuple of tuples for currency code and name."""

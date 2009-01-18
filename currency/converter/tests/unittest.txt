@@ -74,4 +74,23 @@ Utility tests
     >>> rabru(1, "EUR", "USD")
     '1.47'
     >>> rabru(1, "EUR", "EUR")
-    
+
+    >>> from currency.converter.interfaces import ICurrencyCodeName
+    >>> from currency.converter.currency_data import CurrencyCodeName
+    >>> currency_code_name = CurrencyCodeName()
+    >>> provideUtility(currency_code_name, provides=ICurrencyCodeName)
+    >>> currency_code_name_utility = getUtility(ICurrencyCodeName)
+    >>> len(currency_code_name_utility())
+    35
+    >>> {'code': 'USD', 'name': u'US Dollar'} in currency_code_name_utility()
+    True
+
+    >>> from currency.converter.interfaces import ICurrencyCodeNameTuples
+    >>> from currency.converter.currency_data import CurrencyCodeNameTuples
+    >>> currency_code_name_tuples = CurrencyCodeNameTuples()
+    >>> provideUtility(currency_code_name_tuples, provides=ICurrencyCodeNameTuples)
+    >>> currency_code_name_tuples_utility = getUtility(ICurrencyCodeNameTuples)
+    >>> len(currency_code_name_tuples_utility())
+    35
+    >>> ('USD', u'US Dollar') in currency_code_name_tuples_utility()
+    True

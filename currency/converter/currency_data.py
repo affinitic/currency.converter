@@ -1,7 +1,12 @@
 from persistent import Persistent
 from zope.interface import implements
-from currency.converter.interfaces import ICurrencyData, IRateAgainstBaseRate
-from elementtree.ElementTree import XML, ElementTree, Element
+from currency.converter.interfaces import (
+                                            ICurrencyData,
+                                            IRateAgainstBaseRate,
+                                            ICurrencyCodeName,
+                                            ICurrencyCodeNameTuples,
+                                            )
+from elementtree.ElementTree import XML, ElementTree
 import urllib2
 from currencies import currencies
 
@@ -216,8 +221,37 @@ class RateAgainstBaseRate(object):
         days = currency_data.selected_days
         margin = currency_data.margin
         currency_dictionary = currency_data.currency_rate_against_base_code_with_margin(days, base_currency_code, margin)
-        if base_currency_code != currency_code:
+        if currency_code == None:
+            return None
+        elif base_currency_code != currency_code:
             result = currency_dictionary[currency_code] * base_currency_rate
             return '%.2f' %result
         else:
             return None
+
+class CurrencyCodeName(object):
+    """
+    A component which provides list of dictionaries for currency code and name.
+    """
+
+    implements(ICurrencyCodeName)
+
+    def __call__(self):
+        """Returns list of dictionaries for currency code and name."""
+#        currency_data = getUtility(ICD)
+        currency_data = getUtility(ICurrencyData)
+        currency_data_list = currency_data.currency_data_list()
+        return [{'code':i['code'],'name':i['name']} for i in currency_data_list]
+
+class CurrencyCodeNameTuples(object):
+
+    implements(ICurrencyCodeNameTuples)
+
+    def __call__(self):
+        """Returns tuple of tuples for currency code and name."""
+#        currency_data = getUtility(ICD)
+        currency_data = getUtility(ICurrencyData)
+        currency_data_list = currency_data.currency_data_list()
+        l = [(i['code'],i['name']) for i in currency_data_list]
+        t = tuple(l)
+        return t
