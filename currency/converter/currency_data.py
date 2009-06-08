@@ -223,6 +223,8 @@ class RateAgainstBaseRate(object):
         currency_dictionary = currency_data.currency_rate_against_base_code_with_margin(days, base_currency_code, margin)
         if currency_code == None:
             return None
+        if currency_code == '':
+            return None
         elif base_currency_code != currency_code:
             result = currency_dictionary[currency_code] * base_currency_rate
             return '%.2f' %result
@@ -238,7 +240,6 @@ class CurrencyCodeName(object):
 
     def __call__(self):
         """Returns list of dictionaries for currency code and name."""
-#        currency_data = getUtility(ICD)
         currency_data = getUtility(ICurrencyData)
         currency_data_list = currency_data.currency_data_list()
         return [{'code':i['code'],'name':i['name']} for i in currency_data_list]
@@ -249,7 +250,6 @@ class CurrencyCodeNameTuples(object):
 
     def __call__(self):
         """Returns tuple of tuples for currency code and name."""
-#        currency_data = getUtility(ICD)
         currency_data = getUtility(ICurrencyData)
         currency_data_list = currency_data.currency_data_list()
         l = [(i['code'],i['name']) for i in currency_data_list]

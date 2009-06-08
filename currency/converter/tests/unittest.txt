@@ -94,3 +94,31 @@ Utility tests
     35
     >>> ('USD', u'US Dollar') in currency_code_name_tuples_utility()
     True
+
+    >>> from currency.converter.utility.vocabulary import CurrencyVocabularyFactory
+    >>> class Mock(object):
+    ...     def __init__(self, **kwargs):
+    ...         for k, v in kwargs.items(): setattr(self, k, v)
+
+    >>> portal = Mock()
+    >>> context = Mock(portal_url=Mock(getPortalObject=lambda: portal))
+    >>> currency_vocabulary_factory = CurrencyVocabularyFactory(context)
+    >>> currency_vocabulary_factory
+    <zope.schema.vocabulary.SimpleVocabulary object at ...>
+    >>> from zope.schema.interfaces import IVocabularyFactory
+    >>> provideUtility(currency_vocabulary_factory, provides=IVocabularyFactory, name="currency.converter.CurrencyCodeName")
+    >>> currency_code_name_factory = getUtility(IVocabularyFactory, u"currency.converter.CurrencyCodeName")
+    >>> from zope.schema.interfaces import IVocabularyTokenized
+    >>> IVocabularyTokenized.providedBy(currency_code_name_factory)
+    True
+    >>> eur = currency_code_name_factory.getTermByToken('EUR')
+    >>> eur.value
+    'EUR'
+    >>> eur.token
+    'EUR'
+    >>> from zope.schema.interfaces import ITitledTokenizedTerm
+    >>> from zope.interface import alsoProvides
+    >>> ITitledTokenizedTerm.providedBy(eur)
+    True
+    >>> eur.title
+    u'Euro'

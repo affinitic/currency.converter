@@ -1,51 +1,45 @@
-currency.converter Installation
-=======================
+Installation
+=============
 
-To install currency.converter into the global Python environment (or a workingenv),
-using a traditional Zope 2 instance, you can do this:
+If you are using zc.buildout and the plone.recipe.zope2instance
+recipe to manage your project, just do this:
 
- * When you're reading this you have probably already run 
-   ``easy_install currency.converter``. Find out how to install setuptools
-   (and EasyInstall) here:
-   http://peak.telecommunity.com/DevCenter/EasyInstall
+* Add ``currency.converter`` to the list of eggs to install, e.g.:
 
- * If you are using Zope 2.9 (not 2.10), get `pythonproducts`_ and install it 
-   via::
+    |    [buildout]
+    |    eggs =
+    |        currency.converter
 
-       python setup.py install --home /path/to/instance
+* Tell the plone.recipe.zope2instance recipe to install a ZCML slug:
 
-   into your Zope instance.
+    |    [instance]
+    |    recipe = plone.recipe.zope2instance
+    |    zcml =
+    |        currency.converter
 
- * Create a file called ``currency.converter-configure.zcml`` in the
-   ``/path/to/instance/etc/package-includes`` directory.  The file
-   should only contain this::
+* Re-run buildout, e.g. with:
 
-       <include package="currency.converter" />
+    |    $ ./bin/buildout
 
-.. _pythonproducts: http://plone.org/products/pythonproducts
+Setting Time Server
+-------------------------
+To fetch the currency data regularly like every day, describe to the instance section of buildout.cfg the next way.
 
-Alternatively, if you are using zc.buildout and the plone.recipe.zope2instance
-recipe to manage your project, you can do this:
+    |    [instance]
+    |    zope-conf-additional =
+    |        <clock-server>
+    |          method /your_portal/@@manage-currency
+    |          period 86400
+    |          user admin
+    |          password admin_pass
+    |          host localhost
+    |        </clock-server>
 
- * Add ``currency.converter`` to the list of eggs to install, e.g.:
- 
-    [buildout]
-    ...
-    eggs =
-        ...
-        currency.converter
-        
-  * Tell the plone.recipe.zope2instance recipe to install a ZCML slug:
-  
-    [instance]
-    recipe = plone.recipe.zope2instance
-    ...
-    zcml =
-        currency.converter
-        
-  * Re-run buildout, e.g. with:
-  
-    $ ./bin/buildout
-        
-You can skip the ZCML slug if you are going to explicitly include the package
-from another package's configure.zcml file.
+* Change your_portal to your plone site id
+* Period is seconds between eache fetch of the currency data. 86400 seconds are the 24 hour. The data is usually updated daily on week days.
+* Describe admin name to admin and its password to admin_pass.
+* host is host name of your server.
+
+Upgrading/reinstalling
+--------------------------------
+When you reinstall or upgrade to new version, the persisted data is not migrated to new environment, so please visit your_portal/@@manage-currency after reinstall or upgrade to get the current data or if you have set the time server, you can wait till the server fetches those values for you.

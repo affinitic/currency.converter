@@ -1,12 +1,21 @@
 from setuptools import setup, find_packages
+import os
 
-version = '0.3.5'
+def read(*rnames):
+    return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
+
+version = read('currency', 'converter', 'version.txt')
+
+long_description = (
+                        open("README.txt").read() + "\n" +
+                        open(os.path.join("docs", "HISTORY.txt")).read() + "\n" +
+                        open(os.path.join("docs", "INSTALL.txt")).read()
+    )
 
 setup(name='currency.converter',
       version=version,
       description="Currency Converter",
-      long_description="""\
-Converts currency derived from European Central Bank.""",
+      long_description=long_description,
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         "Framework :: Plone",
@@ -17,8 +26,8 @@ Converts currency derived from European Central Bank.""",
         ],
       keywords='',
       author='Taito Horiuchi',
-      author_email='taito.horiuchi@abita.fi',
-      url='http://taito.abita.fi/',
+      author_email='taito.horiuchi [at] abita.fi',
+      url='http://pypi.python.org/pypi/currency.converter',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['currency'],
