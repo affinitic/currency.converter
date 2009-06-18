@@ -9,11 +9,6 @@ class TestSetup(CurrencyConverterTestCase):
     def afterSetUp(self):
         self.types = getToolByName(self.portal, 'portal_types')
 
-## properties.xml
-
-#    def test_currency_data_xml(self):
-#        self.failUnless(self.portal.getProperty('currency_data.xml'))
-
 ## componentregistry.xml
 
     def test_utility(self):

@@ -4,7 +4,7 @@ import os
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
-version = read('currency', 'converter', 'version.txt')
+version = read('currency', 'converter', 'version.txt')[:-1]
 
 long_description = (
                         open("README.txt").read() + "\n" +
@@ -26,7 +26,7 @@ setup(name='currency.converter',
         ],
       keywords='',
       author='Taito Horiuchi',
-      author_email='taito.horiuchi [at] abita.fi',
+      author_email='taito.horiuchi@abita.fi',
       url='http://pypi.python.org/pypi/currency.converter',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),

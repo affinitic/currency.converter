@@ -6,12 +6,6 @@
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="currency.converter">
   <body>
-<!--
-<metal:css fill-slot="css_slot">
-    <style type="text/css" media="all"
-            tal:content="string: @import url(${context/++resource++mall-mallcontent.css});"></style>
-</metal:css>
--->
     <metal:main fill-slot="main">
 
     <form method="post"
@@ -104,11 +98,6 @@
           </tr>
         </tbody>
       </table>
-
-<!--
-      <p tal:content="view/get_currency_data" />
--->
-
 
     </form>
     </metal:main>
