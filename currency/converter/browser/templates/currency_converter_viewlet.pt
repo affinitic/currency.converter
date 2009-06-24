@@ -1,25 +1,21 @@
 <!-- Currency Converter Viewlet -->
 <div i18n:domain="currency.converter">
+  <h1 i18n:translate="">Currency Converter</h1>
 
-    <h1 i18n:translate="Currency Converter">Currency Converter</h1>
-    <p tal:condition="not:view/currency_data" 
-       i18n:translate="no_currency_data_available">
-      There are no currency data available.
-    </p>
+  <p tal:condition="not:view/currency_data" 
+     i18n:translate="no_currency_data_available">
+    There are no currency data available.
+  </p>
 
-    <div tal:condition="view/currency_data">
-
+  <div tal:condition="view/currency_data">
     <p>
       <span i18n:translate="">Currency Rate Updated on</span> : <span tal:replace="view/updated_date" />
     </p>
-
     <h2 i18n:translate="">Convert the currency...</h2>
-
     <form method="post"
           tal:attributes="action view/view_url">
-
       <input type="text" size="7" name="base_currency_rate"
-                     tal:attributes="value view/base_currency_rate" />
+             tal:attributes="value view/base_currency_rate" />
       <select name="base_currency_code" id="base_currency_code">
         <tal:block tal:repeat="cct view/currency_code_tuples"
                    tal:define="sc view/selected_base_currency_code">
@@ -41,14 +37,14 @@
           </option>
         </tal:block>
       </select>
-      <br />
-      <p tal:content="view/error_message" />
       <input class="context"
              type="submit"
              id="form.button.Convert"
              value="Convert"
              name="form.button.Convert"
              i18n:attributes="value"/>
+      <br />
+      <p tal:content="view/error_message" />
     </form>
 
     <p tal:condition="view/calculated_rate">
@@ -59,5 +55,5 @@
       <span tal:replace="view/selected_currency_code" />
     </p>
 
-    </div>
+  </div>
 </div>

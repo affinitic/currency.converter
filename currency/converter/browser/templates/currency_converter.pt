@@ -7,28 +7,23 @@
       i18n:domain="currency.converter">
   <body>
     <metal:main fill-slot="main">
-
-    <div tal:replace="structure provider:currency.converter.viewletManager" />
-
-    <h2 i18n:translate="Currency Unit and Name List">Currency Unit and Name List</h2>
-    <table class="listing">
-      <thead>
-        <tr>
-          <th i18n:translate="Currency Unit">Currency Unit</th>
-          <th i18n:translate="Currency Name">Currency Name</th>
-        </tr>
-      </thead>
-      <tbody tal:repeat="currency view/currencies">
-        <tr class="even" tal:define="oddrow repeat/currency/odd;"
-            tal:attributes="class python:oddrow and 'even' or 'odd'">
-          <td tal:content="currency/code" />
-          <td tal:content="currency/name" />
-        </tr>
-      </tbody>
-    </table>
-
-
-
+      <div tal:replace="structure provider:currency.converter.viewletManager" />
+      <h2 i18n:translate="">Currency Unit and Name List</h2>
+      <table class="listing">
+        <thead>
+          <tr>
+            <th i18n:translate="">Currency Unit</th>
+            <th i18n:translate="">Currency Name</th>
+          </tr>
+        </thead>
+        <tbody tal:repeat="currency view/currencies">
+          <tr class="even" tal:define="oddrow repeat/currency/odd;"
+              tal:attributes="class python:oddrow and 'even' or 'odd'">
+            <td tal:content="currency/code" />
+            <td tal:content="currency/name" />
+          </tr>
+        </tbody>
+      </table>
     </metal:main>
   </body>
 </html>

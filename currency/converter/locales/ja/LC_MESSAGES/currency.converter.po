@@ -231,7 +231,7 @@ msgstr "通貨単位"
 #. Default: "Currency Unit and Name List"
 #: ../converter/browser/templates/currency_converter.pt:13
 msgid "Currency Unit and Name List"
-msgstr "通貨名-通貨単位リスト"
+msgstr "通貨単位-通貨名リスト"
 
 #: ../converter/currencies.py:46
 msgid "Cyprus Pound"
