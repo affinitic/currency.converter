@@ -8,12 +8,28 @@ class TestSetup(CurrencyConverterTestCase):
 
     def afterSetUp(self):
         self.types = getToolByName(self.portal, 'portal_types')
+        self.properties = getToolByName(self.portal, 'portal_properties')
 
-## componentregistry.xml
-
+    ## componentregistry.xml
     def test_utility(self):
         utility = queryUtility(ICurrencyData)
         self.assertNotEquals(None, utility)
+
+    ## Propertiestool.xml
+    def test_currency_xml(self):
+        self.assertEquals('http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml', self.properties.currency_converter_properties.getProperty('currency_xml'))
+
+    def test_base_currency(self):
+        self.assertEquals('EUR', self.properties.currency_converter_properties.getProperty('base_currency'))
+
+    def test_days_for_avarage(self):
+        for type in self.content_types:
+            self.assertEquals(1, self.properties.currency_converter_properties.getProperty('days_for_avarage'))
+
+    def test_margin_for_avarage(self):
+        for type in self.content_types:
+            self.assertEquals(0, self.properties.currency_converter_properties.getProperty('margin_for_avarage'))
+
 
 def test_suite():
     suite = unittest.TestSuite()
