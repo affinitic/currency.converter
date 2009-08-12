@@ -23,12 +23,10 @@ class TestSetup(CurrencyConverterTestCase):
         self.assertEquals('EUR', self.properties.currency_converter_properties.getProperty('base_currency'))
 
     def test_days_for_avarage(self):
-        for type in self.content_types:
-            self.assertEquals(1, self.properties.currency_converter_properties.getProperty('days_for_avarage'))
+        self.assertEquals(1, self.properties.currency_converter_properties.getProperty('days_for_avarage'))
 
     def test_margin_for_avarage(self):
-        for type in self.content_types:
-            self.assertEquals(0, self.properties.currency_converter_properties.getProperty('margin_for_avarage'))
+        self.assertEquals(0, self.properties.currency_converter_properties.getProperty('margin_for_avarage'))
 
 
 def test_suite():

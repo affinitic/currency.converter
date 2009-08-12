@@ -2,6 +2,10 @@
  A unit doctest
 ========================
 
+Imports
+-------
+    >>> from zope.component import getUtility, provideUtility
+
 CurrencyData
 ---------------
     >>> from currency.converter.currency_data import CurrencyData
@@ -10,23 +14,61 @@ CurrencyData
     >>> ICurrencyData.providedBy(currency_data)
     True
 
-Register CurrencyData utility as ICurrencyData interface
-------------------------------------------------------------------------
-    >>> from zope.component import getUtility, provideUtility
+    >>> import os
+
+#    >>> from urllib2 import urlopen
+#    >>> urlopen('file:///home/taito/Development/homepage/src/currency.converter/currency/converter/tests/sample-90d.xml')
+#    >>> os.path.join(os.path.dirname(__file__), 'sample-90d.xml')
+
+    >>> xml = 'file://' + os.path.join('file://', os.path.dirname(__file__), 'sample-90d.xml')
+
+#    >>> urlopen(xml)
+#    >>> urlopen(os.path.join('file://', os.path.dirname(__file__), 'sample-90d.xml'))
+#    >>> def read(*rnames):
+#    ...     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
+#    >>> read('sample-90d.xml')[:-1]
+
+    >>> currency_data.currencies
+    >>> currency_data.currency_data(xml)
+    >>> currency_data.currencies[0][0]
+    '2009-08-12'
+    >>> currency_data.date
+    '2009-08-12'
+    >>> currency_data.codes[0]
+    'EUR'
+    >>> len(currency_data.codes)
+    34
+    >>> currency_data.currency_data_list()[0]['code']
+    'EUR'
+    >>> len(currency_data.currency_data_list()[0]['rate'])
+    0
+    >>> len(currency_data.currency_data_list()[1]['rate'])
+    64
+    >>> currency_data.updated_date()
+    '2009-08-12'
+    >>> len(currency_data.currency_codes())
+    34
+    >>> currency_data.currency_code_tuples()[0]
+    ('EUR', (u'Euro', u'\u20ac'))
+    >>> len(currency_data.currency_code_tuples())
+    34
+    >>> len(currency_data.currency_code_data().keys())
+    34
+    >>> len(currency_data.currency_code_data()['USD'])
+    64
+    >>> currency_data.currency_code_data()['USD']
+    ['1.417', '1.4166', '1.4202', '1.4357', '1.437', '1.441', '1.4384', '1.4303', '1.4138', '1.4053', '1.4104', '1.4229', '1.4269', '1.4227', '1.4229', '1.4191', '1.4223', '1.4217', '1.409', '1.413', '1.4089', '1.3991', '1.3975', '1.3901', '1.399', '1.3901', '1.4019', '1.3897', '1.4009', '1.4049', '1.4096', '1.4134', '1.4058', '1.4096', '1.394', '1.4029', '1.3978', '1.3858', '1.3932', '1.392', '1.384', '1.389', '1.385', '1.4004', '1.3969', '1.4102', '1.3959', '1.3866', '1.4177', '1.4095', '1.4207', '1.4238', '1.422', '1.4098', '1.3856', '1.3901', '1.3908', '1.401', '1.3972', '1.3771', '1.369', '1.3612', '1.3494', '1.3518']
+    >>> currency_data.currency_code_average(1)['USD']
+    1.417
+    >>> currency_data.currency_code_average(2)['USD'] == (1.417 + 1.4166) / 2
+    True
+
+
     >>> provideUtility(currency_data, provides=ICurrencyData)
 
-Check Methods withought any currency data.
---------------------------------------------------
-    >>> currency_data.updated_date()
-    False
-    >>> currency_data.currency_codes()
-    ['EUR']
-    >>> currency_data.currency_code_data()
-    False
-    >>> currency_data.currency_code_tuples()
-    [('EUR', (u'Euro', u'\u20ac'))]
-    >>> currency_data.days()
-    [1]
+    >>> len(currency_data.days())
+    64
+    
 
 Check Methods with currency data.
 ------------------------------------------

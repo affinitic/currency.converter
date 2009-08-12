@@ -1,3 +1,4 @@
+import warnings
 from persistent import Persistent
 from zope.interface import implements
 from currency.converter.interfaces import (
@@ -6,7 +7,7 @@ from currency.converter.interfaces import (
                                             ICurrencyCodeName,
                                             ICurrencyCodeNameTuples,
                                             )
-from elementtree.ElementTree import XML, ElementTree
+from elementtree.ElementTree import ElementTree#, XML
 import urllib2
 from currencies import currencies
 
@@ -20,12 +21,14 @@ class CurrencyData(Persistent):
         self.selected_base_currency = "EUR"
         self.selected_days = 1
         self.margin = 0.00
+        self.date = None
+        self.codes = ['EUR']
 
-    def currency_data(self):
+    def currency_data(self, xml='http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml'):
         """Returns the most recent currency data with tuples."""
         etree90 = ElementTree()
         try:
-            data90 = urllib2.urlopen('http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml')
+            data90 = urllib2.urlopen(xml)
             root90 = ElementTree.parse(etree90, data90)
             DATA90 = root90[2]
             DATA_list = []
@@ -36,9 +39,20 @@ class CurrencyData(Persistent):
                     daily_data_list.append(daily_data_tuple)
                 ddl = (DATA.get('time'), dict(daily_data_list))
                 DATA_list.append(ddl)
-            return DATA_list
+                date = DATA_list[0][0]
+#            if (
+#                (self.currencies is not None and self.date != date) or
+#                (self.currencies is None)
+#            ):
+            if self.date != date:
+                self.currencies = DATA_list
+                self.date = date
+                for date in self.currencies:
+                    for key in date[1].keys():
+                        if key not in self.codes:
+                            self.codes.append(key)
         except:
-            return False
+            pass
 
     def currency_data_list(self):
         """Returns the most recent currency data as a list of dictionaries.
@@ -53,7 +67,7 @@ class CurrencyData(Persistent):
             {...},{...},...
         ]
         """
-        if self.currencies != None:
+        if self.currencies is not None:
             daily_data_list = [daily_data[1] for daily_data in self.currencies]
             results = []
             for code in self.currency_codes():
@@ -95,6 +109,10 @@ class CurrencyData(Persistent):
 
     def updated_date(self):
         """Returns updated date."""
+        warnings.warn(
+            ("'update_date' is deprecated and will be removed in version 0.6"),
+            DeprecationWarning
+        )
         if self.currencies != None:
             return self.currencies[0][0]
         else:
@@ -102,8 +120,12 @@ class CurrencyData(Persistent):
 
     def currency_codes(self):
         """Retrurns currency codes."""
+        warnings.warn(
+            ("'update_date' is deprecated and will be removed in version 0.6"),
+            DeprecationWarning
+        )
         codes = ['EUR']
-        if self.currencies != None:
+        if self.currencies is not None:
             for date in self.currencies:
                 for key in date[1].keys():
                     if key not in codes:
@@ -120,7 +142,7 @@ class CurrencyData(Persistent):
 
     def currency_code_data(self):
         """Returns dictionary of currency code and rate list."""
-        if self.currencies != None:
+        if self.currencies is not None:
             currency_data_withought_date = []
             for data in self.currencies:
                 currency_data_withought_date.append(data[1])
@@ -138,7 +160,7 @@ class CurrencyData(Persistent):
 
     def currency_code_average(self, days):
         """Returns code and average rate of days."""
-        if self.currencies != None:
+        if self.currencies is not None:
             results = {}
             for (code, L) in self.currency_code_data().items():
                 if code == 'EUR':
@@ -165,7 +187,7 @@ class CurrencyData(Persistent):
 
     def days(self):
         """Returns maximum gotten days."""
-        if self.currencies != None:
+        if self.currencies is not None:
             return range(1,len(self.currencies)+1)
         else:
             return [1]

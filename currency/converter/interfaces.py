@@ -1,12 +1,11 @@
 from zope.interface import Interface
-
-from currency.converter import CurrencyConverterMessageFactory as _
+#from currency.converter import CurrencyConverterMessageFactory as _
 
 class ICurrencyData(Interface):
     """CurrencyData itself: for methods which return currency rate, they return currency code as well. (currency_code, currency_rate) tuple?"""
 
-    def currency_data():
-        """Returns the most recent currency data."""
+    def currency_data(xml):
+        """Returns currency data from the xml file."""
 
     def currency_data_list():
         """Returns the most recent currency data as a list of dictionaries.

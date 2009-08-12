@@ -1,15 +1,10 @@
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-
 from Acquisition import aq_inner
-
-from Products.CMFCore.utils import getToolByName
-
+#from Products.CMFCore.utils import getToolByName
 from currency.converter import CurrencyConverterMessageFactory as _
-
-from zope.component import getMultiAdapter
+#from zope.component import getMultiAdapter
 from zope.component import queryUtility
-
 from currency.converter.interfaces import ICurrencyData
 
 class CurrencyManagerView(BrowserView):

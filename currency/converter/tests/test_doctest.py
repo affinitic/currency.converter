@@ -1,11 +1,8 @@
 import unittest
 import doctest
-
 from zope.testing import doctestunit
-from zope.component import testing, eventtesting
-
+from zope.component import testing
 from Testing import ZopeTestCase as ztc
-
 from currency.converter.tests import base
 
 class TestSetup(base.CurrencyConverterFunctionalTestCase):
@@ -20,7 +17,6 @@ class TestSetup(base.CurrencyConverterFunctionalTestCase):
 def test_suite():
     return unittest.TestSuite([
         # Demonstrate the main content types
-#        ztc.ZopeDocFileSuite(
         ztc.FunctionalDocFileSuite(
             'tests/functional.txt', package='currency.converter',
             test_class=TestSetup,
@@ -30,7 +26,6 @@ def test_suite():
         ztc.ZopeDocFileSuite(
             'tests/integration.txt', package='currency.converter',
             test_class=base.CurrencyConverterTestCase,
-#            test_class=TestSetup,
             optionflags=doctest.REPORT_ONLY_FIRST_FAILURE | doctest.NORMALIZE_WHITESPACE | doctest.ELLIPSIS),
 
         # Unit tests
