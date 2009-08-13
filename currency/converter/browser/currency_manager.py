@@ -1,10 +1,12 @@
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from Acquisition import aq_inner
-#from Products.CMFCore.utils import getToolByName
+#from Acquisition import aq_inner
+from zope.app.component.hooks import getSite
+from Products.CMFCore.utils import getToolByName
 from currency.converter import CurrencyConverterMessageFactory as _
 #from zope.component import getMultiAdapter
-from zope.component import queryUtility
+from zope.component import getUtility#, queryUtility
+#from Products.CMFCore.utils import getToolByName
 from currency.converter.interfaces import ICurrencyData
 
 class CurrencyManagerView(BrowserView):
@@ -19,12 +21,22 @@ class CurrencyManagerView(BrowserView):
 
 #        ## Defines.
         form = self.request.form
-        currency_data = queryUtility(ICurrencyData)
-        if currency_data.currency_data():
-            currency_data.currencies = currency_data.currency_data()
-        self.updated_date = currency_data.updated_date()
+#        currency_data = queryUtility(ICurrencyData)
+#        if currency_data.currency_data():
+#            currency_data.currencies = currency_data.currency_data()
+        self.get_currency()
+        currency_data = getUtility(ICurrencyData)
+        try:
+            self.updated_date = currency_data.date
+        except AttributeError:
+            self.updated_date = currency_data.updated_date()
+#        self.updated_date = currency_data.date
         self.currency_code_tuples = currency_data.currency_code_tuples()
-        self.days = currency_data.days()
+        try:
+            self.days = currency_data.amount_of_days
+        except AttributeError:
+            self.days = currency_data.days()
+#        self.days = currency_data.days()
         self.selected_currency = currency_data.selected_base_currency
         self.selected_days = currency_data.selected_days
         self.margin = currency_data.margin
@@ -55,3 +67,13 @@ class CurrencyManagerView(BrowserView):
 
         else:
             return self.template()
+
+    def get_currency(self):
+        site = getSite()
+        properties = getToolByName(site, 'portal_properties')
+        xml_url = properties.currency_converter_properties.getProperty('currency_xml')
+        currency_data = getUtility(ICurrencyData)
+        if xml_url is not None and xml_url != '':
+            currency_data.currency_data(xml_url)
+        else:
+            currency_data.currency_data()

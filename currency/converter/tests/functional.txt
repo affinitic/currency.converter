@@ -2,6 +2,10 @@
  A functional doctest
 ========================
 
+Imports
+-------
+    >>> from Products.CMFCore.utils import getToolByName
+
 Check Plone Root
 ---------------------
     >>> app
@@ -54,8 +58,18 @@ do this from the login page.
     >>> browser.getControl(name='__ac_password').value = default_password
     >>> browser.getControl(name='submit').click()
 
+    >>> url = portal_url + '/@@get-currency'
+    >>> browser.open(url)
+    >>> url = portal_url + '/@@currency-converter'
+    >>> browser.open(url)
+
+    >>> '2009-08-12' in browser.contents
+    True
+
+
 Check link Currency Manager in Add-on Product Configuration in Site Setup.
 ---------------------------------------------------------------------------------------------
+    >>> browser.open(portal_url)
     >>> browser.getLink('Site Setup').click()
     >>> browser.getLink('Currency Manager').click()
     >>> browser.open('http://nohost/plone/@@manage-currency')

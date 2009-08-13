@@ -50,6 +50,7 @@ class CurrencyConverterViewlet(ViewletBase):
         self.calculated_rate = None
 
         self.error_message = None
+        self.float_error_message = None
 
         ## Check buttons.
         convert_button = form.get('form.button.Convert', None) is not None
@@ -59,8 +60,12 @@ class CurrencyConverterViewlet(ViewletBase):
                 self.base_currency_rate = form.get('base_currency_rate')
                 self.base_currency_code = form.get('base_currency_code')
                 self.currency_code = form.get('currency_code')
-                self.calculated_rate = self.calculated_rate_against_base_rate(float(self.base_currency_rate), self.base_currency_code, self.currency_code)
-                return self.render()
+                try:
+                    self.calculated_rate = self.calculated_rate_against_base_rate(float(self.base_currency_rate), self.base_currency_code, self.currency_code)
+                    return self.render()
+                except ValueError:
+                    self.float_error_message = _(u"Please input float like 5.00")
+                    return self.render()
             else:
                 self.error_message =_(u"Please choose different currencies.")
                 return self.render()

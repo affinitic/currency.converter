@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2009-06-18 13:25+0000\n"
+"POT-Creation-Date: 2009-08-13 17:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -70,7 +70,7 @@ msgid "Barbados Dollar"
 msgstr ""
 
 #. Default: "Base Currency"
-#: ../converter/browser/templates/currency_manager.pt:25
+#: ../converter/browser/templates/currency_manager.pt:21
 msgid "Base Currency"
 msgstr ""
 
@@ -176,13 +176,8 @@ msgid "Comoro Franc"
 msgstr ""
 
 #. Default: "Convert"
-#: ../converter/browser/templates/currency_converter_viewlet.pt:46
+#: ../converter/browser/templates/currency_converter_viewlet.pt:40
 msgid "Convert"
-msgstr ""
-
-#. Default: "Convert the currency..."
-#: ../converter/browser/templates/currency_converter_viewlet.pt:16
-msgid "Convert the currency..."
 msgstr ""
 
 #: ../converter/currencies.py:19
@@ -202,12 +197,12 @@ msgid "Cuban Peso"
 msgstr ""
 
 #. Default: "Currency"
-#: ../converter/browser/templates/currency_manager.pt:82
+#: ../converter/browser/templates/currency_manager.pt:81
 msgid "Currency"
 msgstr ""
 
 #. Default: "Currency Converter"
-#: ../converter/browser/templates/currency_converter_viewlet.pt:4
+#: ../converter/browser/templates/currency_converter_viewlet.pt:3
 msgid "Currency Converter"
 msgstr ""
 
@@ -217,22 +212,22 @@ msgid "Currency Manager"
 msgstr ""
 
 #. Default: "Currency Name"
-#: ../converter/browser/templates/currency_converter.pt:18
+#: ../converter/browser/templates/currency_converter.pt:16
 msgid "Currency Name"
 msgstr ""
 
 #. Default: "Currency Rate Updated on"
-#: ../converter/browser/templates/currency_converter_viewlet.pt:13
+#: ../converter/portlets/currency_converter.pt:56
 msgid "Currency Rate Updated on"
 msgstr ""
 
 #. Default: "Currency Unit"
-#: ../converter/browser/templates/currency_converter.pt:17
+#: ../converter/browser/templates/currency_converter.pt:15
 msgid "Currency Unit"
 msgstr ""
 
 #. Default: "Currency Unit and Name List"
-#: ../converter/browser/templates/currency_converter.pt:13
+#: ../converter/browser/templates/currency_converter.pt:11
 msgid "Currency Unit and Name List"
 msgstr ""
 
@@ -249,7 +244,7 @@ msgid "Danish Krone"
 msgstr ""
 
 #. Default: "Days for Average"
-#: ../converter/browser/templates/currency_manager.pt:44
+#: ../converter/browser/templates/currency_manager.pt:38
 msgid "Days for Average"
 msgstr ""
 
@@ -483,7 +478,7 @@ msgid "Maltese Lira"
 msgstr ""
 
 #. Default: "Margin"
-#: ../converter/browser/templates/currency_manager.pt:63
+#: ../converter/browser/templates/currency_manager.pt:55
 msgid "Margin"
 msgstr ""
 
@@ -591,11 +586,11 @@ msgstr ""
 msgid "Platinum"
 msgstr ""
 
-#: ../converter/browser/currency_converter.py:70
+#: ../converter/browser/currency_converter.py:73
 msgid "Please choose different currencies."
 msgstr ""
 
-#: ../converter/browser/currency_manager.py:52
+#: ../converter/browser/currency_manager.py:59
 msgid "Please input float like 5.00"
 msgstr ""
 
@@ -612,7 +607,7 @@ msgid "Qatari Riyal"
 msgstr ""
 
 #. Default: "Rate"
-#: ../converter/browser/templates/currency_manager.pt:85
+#: ../converter/browser/templates/currency_manager.pt:84
 msgid "Rate"
 msgstr ""
 
@@ -789,8 +784,13 @@ msgid "Unidades de fomento"
 msgstr ""
 
 #. Default: "Update"
-#: ../converter/browser/templates/currency_manager.pt:14
+#: ../converter/browser/templates/currency_manager.pt:71
 msgid "Update"
+msgstr ""
+
+#. Default: "Updated on"
+#: ../converter/browser/templates/currency_converter_viewlet.pt:12
+msgid "Updated on"
 msgstr ""
 
 #: ../converter/currencies.py:166

@@ -1,4 +1,5 @@
 import warnings
+from datetime import datetime
 from persistent import Persistent
 from zope.interface import implements
 from currency.converter.interfaces import (
@@ -7,10 +8,9 @@ from currency.converter.interfaces import (
                                             ICurrencyCodeName,
                                             ICurrencyCodeNameTuples,
                                             )
-from elementtree.ElementTree import ElementTree#, XML
+from elementtree.ElementTree import ElementTree
 import urllib2
 from currencies import currencies
-
 from zope.component import getUtility
 
 class CurrencyData(Persistent):
@@ -23,12 +23,17 @@ class CurrencyData(Persistent):
         self.margin = 0.00
         self.date = None
         self.codes = ['EUR']
+        self.amount_of_days = [1]
 
-    def currency_data(self, xml='http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml'):
+    def currency_data(self, xml_url='http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml'):
         """Returns the most recent currency data with tuples."""
+        now = datetime.now()
+        today = u'-'.join([unicode(now.year), unicode(now.month), unicode(now.day)])
+        if today == self.updated_date():
+            return
         etree90 = ElementTree()
         try:
-            data90 = urllib2.urlopen(xml)
+            data90 = urllib2.urlopen(xml_url)
             root90 = ElementTree.parse(etree90, data90)
             DATA90 = root90[2]
             DATA_list = []
@@ -40,17 +45,17 @@ class CurrencyData(Persistent):
                 ddl = (DATA.get('time'), dict(daily_data_list))
                 DATA_list.append(ddl)
                 date = DATA_list[0][0]
-#            if (
-#                (self.currencies is not None and self.date != date) or
-#                (self.currencies is None)
-#            ):
-            if self.date != date:
+            try:
+                if self.date != date:
+                    self.currencies = DATA_list
+                    self.date = date
+                    for date in self.currencies:
+                        for key in date[1].keys():
+                            if key not in self.codes:
+                                self.codes.append(key)
+                    self.amount_of_days = range(1,len(self.currencies)+1)
+            except AttributeError:
                 self.currencies = DATA_list
-                self.date = date
-                for date in self.currencies:
-                    for key in date[1].keys():
-                        if key not in self.codes:
-                            self.codes.append(key)
         except:
             pass
 
@@ -110,7 +115,7 @@ class CurrencyData(Persistent):
     def updated_date(self):
         """Returns updated date."""
         warnings.warn(
-            ("'update_date' is deprecated and will be removed in version 0.6"),
+            ("'update_date' is deprecated and will be removed"),
             DeprecationWarning
         )
         if self.currencies != None:
@@ -121,7 +126,7 @@ class CurrencyData(Persistent):
     def currency_codes(self):
         """Retrurns currency codes."""
         warnings.warn(
-            ("'update_date' is deprecated and will be removed in version 0.6"),
+            ("'update_date' is deprecated and will be removed"),
             DeprecationWarning
         )
         codes = ['EUR']
@@ -187,6 +192,10 @@ class CurrencyData(Persistent):
 
     def days(self):
         """Returns maximum gotten days."""
+        warnings.warn(
+            ("'update_date' is deprecated and will be removed"),
+            DeprecationWarning
+        )
         if self.currencies is not None:
             return range(1,len(self.currencies)+1)
         else:

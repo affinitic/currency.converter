@@ -4,21 +4,28 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="currency.converter">
 
-    <!-- Register pages -->
+  <!-- Register pages -->
+  <browser:page
+    for="Products.CMFCore.interfaces.ISiteRoot"
+    name="manage-currency"
+    class=".currency_manager.CurrencyManagerView"
+    permission="cmf.ManagePortal"
+    />
 
-    <browser:page
-      for="Products.CMFCore.interfaces.ISiteRoot"
-      name="manage-currency"
-      class=".currency_manager.CurrencyManagerView"
-      permission="cmf.ManagePortal"
-      />
+  <browser:page
+    for="*"
+    name="get-currency"
+    class=".currency_manager.CurrencyManagerView"
+    attribute="get_currency"
+    permission="cmf.ManagePortal"
+    />
 
-    <browser:page
-      for="Products.CMFCore.interfaces.ISiteRoot"
-      name="currency-converter"
-      class=".currency_converter.CurrencyConverterView"
-      permission="zope2.View"
-      />
+  <browser:page
+    for="Products.CMFCore.interfaces.ISiteRoot"
+    name="currency-converter"
+    class=".currency_converter.CurrencyConverterView"
+    permission="zope2.View"
+    />
 
     <!-- Register viewlet managers -->
 

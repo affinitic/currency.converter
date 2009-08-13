@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: currency.converter\n"
-"POT-Creation-Date: 2009-06-18 13:25+0000\n"
+"POT-Creation-Date: 2009-08-13 17:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: Taito Horiuchi <taito.horiuchi@abita.fi>\n"
 "Language-Team: Japanese\n"
@@ -67,7 +67,7 @@ msgid "Barbados Dollar"
 msgstr "バルバドスドル"
 
 #. Default: "Base Currency"
-#: ../converter/browser/templates/currency_manager.pt:25
+#: ../converter/browser/templates/currency_manager.pt:21
 msgid "Base Currency"
 msgstr "基本通貨"
 
@@ -173,14 +173,9 @@ msgid "Comoro Franc"
 msgstr "コモロフラン"
 
 #. Default: "Convert"
-#: ../converter/browser/templates/currency_converter_viewlet.pt:46
+#: ../converter/browser/templates/currency_converter_viewlet.pt:40
 msgid "Convert"
 msgstr "変換"
-
-#. Default: "Convert the currency..."
-#: ../converter/browser/templates/currency_converter_viewlet.pt:16
-msgid "Convert the currency..."
-msgstr "為替変換"
 
 #: ../converter/currencies.py:19
 msgid "Convertible Marks"
@@ -199,12 +194,12 @@ msgid "Cuban Peso"
 msgstr "キューバペソ"
 
 #. Default: "Currency"
-#: ../converter/browser/templates/currency_manager.pt:82
+#: ../converter/browser/templates/currency_manager.pt:81
 msgid "Currency"
 msgstr "通貨"
 
 #. Default: "Currency Converter"
-#: ../converter/browser/templates/currency_converter_viewlet.pt:4
+#: ../converter/browser/templates/currency_converter_viewlet.pt:3
 msgid "Currency Converter"
 msgstr "為替変換"
 
@@ -214,24 +209,24 @@ msgid "Currency Manager"
 msgstr "通貨管理"
 
 #. Default: "Currency Name"
-#: ../converter/browser/templates/currency_converter.pt:18
+#: ../converter/browser/templates/currency_converter.pt:16
 msgid "Currency Name"
-msgstr "通貨名"
+msgstr "名称"
 
 #. Default: "Currency Rate Updated on"
-#: ../converter/browser/templates/currency_converter_viewlet.pt:13
+#: ../converter/portlets/currency_converter.pt:56
 msgid "Currency Rate Updated on"
 msgstr "為替レート情報更新日"
 
 #. Default: "Currency Unit"
-#: ../converter/browser/templates/currency_converter.pt:17
+#: ../converter/browser/templates/currency_converter.pt:15
 msgid "Currency Unit"
-msgstr "通貨単位"
+msgstr "単位"
 
 #. Default: "Currency Unit and Name List"
-#: ../converter/browser/templates/currency_converter.pt:13
+#: ../converter/browser/templates/currency_converter.pt:11
 msgid "Currency Unit and Name List"
-msgstr "通貨単位-通貨名リスト"
+msgstr "通貨単位-名称表"
 
 #: ../converter/currencies.py:46
 msgid "Cyprus Pound"
@@ -246,7 +241,7 @@ msgid "Danish Krone"
 msgstr "デンマーククローネ"
 
 #. Default: "Days for Average"
-#: ../converter/browser/templates/currency_manager.pt:44
+#: ../converter/browser/templates/currency_manager.pt:38
 msgid "Days for Average"
 msgstr "平均値を算出するための日数"
 
@@ -480,7 +475,7 @@ msgid "Maltese Lira"
 msgstr "マルタリラ"
 
 #. Default: "Margin"
-#: ../converter/browser/templates/currency_manager.pt:63
+#: ../converter/browser/templates/currency_manager.pt:55
 msgid "Margin"
 msgstr "マージン"
 
@@ -588,13 +583,13 @@ msgstr "フィリピンペソ"
 msgid "Platinum"
 msgstr ""
 
-#: ../converter/browser/currency_converter.py:70
+#: ../converter/browser/currency_converter.py:73
 msgid "Please choose different currencies."
 msgstr "相異なる通貨を選択してください。"
 
-#: ../converter/browser/currency_manager.py:52
+#: ../converter/browser/currency_manager.py:59
 msgid "Please input float like 5.00"
-msgstr "数字を入力してください。"
+msgstr "半角数字を入力してください。"
 
 #: ../converter/currencies.py:128
 msgid "Polish Złoty"
@@ -609,7 +604,7 @@ msgid "Qatari Riyal"
 msgstr "カタールリアル"
 
 #. Default: "Rate"
-#: ../converter/browser/templates/currency_manager.pt:85
+#: ../converter/browser/templates/currency_manager.pt:84
 msgid "Rate"
 msgstr "レート"
 
@@ -786,9 +781,14 @@ msgid "Unidades de fomento"
 msgstr ""
 
 #. Default: "Update"
-#: ../converter/browser/templates/currency_manager.pt:14
+#: ../converter/browser/templates/currency_manager.pt:71
 msgid "Update"
 msgstr "更新"
+
+#. Default: "Updated on"
+#: ../converter/browser/templates/currency_converter_viewlet.pt:12
+msgid "Updated on"
+msgstr "更新日"
 
 #: ../converter/currencies.py:166
 msgid "Uzbekistan Sum"

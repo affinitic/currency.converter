@@ -1,14 +1,9 @@
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-
-from Acquisition import aq_inner
-
-from Products.CMFCore.utils import getToolByName
-
+#from Acquisition import aq_inner
+#from Products.CMFCore.utils import getToolByName
 from currency.converter import CurrencyConverterMessageFactory as _
-
 from zope.component import getUtility
-
 from currency.converter.interfaces import (
                                             ICurrencyData,
                                             IRateAgainstBaseRate,
@@ -31,9 +26,17 @@ class CurrencyConverterView(BrowserView):
         ## Data from ICurrencyData
         currency_data = getUtility(ICurrencyData)
         self.currency_data = currency_data.currencies
-        self.updated_date = currency_data.updated_date()
+        try:
+            self.updated_date = currency_data.date
+        except AttributeError:
+            self.updated_date = currency_data.updated_date()
+#        self.updated_date = currency_data.date
         self.currency_code_tuples = currency_data.currency_code_tuples()
-        self.days = currency_data.days()
+        try:
+            self.days = currency_data.amount_of_days
+        except AttributeError:
+            self.days = currency_data.days()
+#        self.days = currency_data.amount_of_days
         self.selected_base_currency = currency_data.selected_base_currency
         self.selected_days = currency_data.selected_days
         self.margin = currency_data.margin
@@ -64,8 +67,13 @@ class CurrencyConverterView(BrowserView):
                 self.base_currency_rate = form.get('base_currency_rate')
                 self.base_currency_code = form.get('base_currency_code')
                 self.currency_code = form.get('currency_code')
-                self.calculated_rate = self.calculated_rate_against_base_rate(float(self.base_currency_rate), self.base_currency_code, self.currency_code)
-                return self.template()
+                try:
+                    self.calculated_rate = self.calculated_rate_against_base_rate(float(self.base_currency_rate), self.base_currency_code, self.currency_code)
+                    return self.template()
+                except ValueError:
+                    self.float_error_message = _(u"Please input float like 5.00")
+#                self.calculated_rate = self.calculated_rate_against_base_rate(float(self.base_currency_rate), self.base_currency_code, self.currency_code)
+                    return self.template()
             else:
                 self.error_message =_(u"Please choose different currencies.")
                 return self.template()

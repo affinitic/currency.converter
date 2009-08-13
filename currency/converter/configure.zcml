@@ -15,6 +15,9 @@
 
   <i18n:registerTranslations directory="locales"/>
 
+  <utility factory=".currency_data.CurrencyCodeName" />
+  <utility factory=".currency_data.CurrencyCodeNameTuples" />
+
   <genericsetup:registerProfile
     name="default"
     title="Currency Converter"
@@ -23,7 +26,13 @@
     provides="Products.GenericSetup.interfaces.EXTENSION"
     />
 
-  <utility factory=".currency_data.CurrencyCodeName" />
-  <utility factory=".currency_data.CurrencyCodeNameTuples" />
+  <genericsetup:registerProfile
+    name="uninstall"
+    title="Uninstall Profile for Currency Converter"
+    directory="profiles/uninstall"
+    description="Removes Currency Converter."
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    />
 
 </configure>

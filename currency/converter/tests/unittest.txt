@@ -15,19 +15,7 @@ CurrencyData
     True
 
     >>> import os
-
-#    >>> from urllib2 import urlopen
-#    >>> urlopen('file:///home/taito/Development/homepage/src/currency.converter/currency/converter/tests/sample-90d.xml')
-#    >>> os.path.join(os.path.dirname(__file__), 'sample-90d.xml')
-
     >>> xml = 'file://' + os.path.join('file://', os.path.dirname(__file__), 'sample-90d.xml')
-
-#    >>> urlopen(xml)
-#    >>> urlopen(os.path.join('file://', os.path.dirname(__file__), 'sample-90d.xml'))
-#    >>> def read(*rnames):
-#    ...     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
-#    >>> read('sample-90d.xml')[:-1]
-
     >>> currency_data.currencies
     >>> currency_data.currency_data(xml)
     >>> currency_data.currencies[0][0]

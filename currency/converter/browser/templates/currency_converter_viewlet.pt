@@ -9,13 +9,20 @@
 
   <div tal:condition="view/currency_data">
     <p>
-      <span i18n:translate="">Currency Rate Updated on</span> : <span tal:replace="view/updated_date" />
+      <span i18n:translate="">Updated on</span> : <span tal:replace="view/updated_date" />
     </p>
-    <h2 i18n:translate="">Convert the currency...</h2>
+    <!--<h2 i18n:translate="">Convert the currency...</h2>-->
     <form method="post"
           tal:attributes="action view/view_url">
       <input type="text" size="7" name="base_currency_rate"
-             tal:attributes="value view/base_currency_rate" />
+             tal:attributes="value view/base_currency_rate"
+             tal:condition="not: view/float_error_message" />
+      <div tal:condition="view/float_error_message" class="red_caution">
+        <input type="text" size="7" name="base_currency_rate"
+               tal:attributes="value view/base_currency_rate" />
+        <br />
+        <span tal:replace="view/float_error_message" />
+      </div>
       <select name="base_currency_code" id="base_currency_code">
         <tal:block tal:repeat="cct view/currency_code_tuples"
                    tal:define="sc view/selected_base_currency_code">

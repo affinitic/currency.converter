@@ -28,7 +28,7 @@ To fetch the currency data regularly like every day, describe to the instance se
     |    [instance]
     |    zope-conf-additional =
     |        <clock-server>
-    |          method /your_portal/@@manage-currency
+    |          method /your_portal/@@get-currency
     |          period 86400
     |          user admin
     |          password admin_pass
