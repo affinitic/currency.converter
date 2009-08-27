@@ -125,7 +125,7 @@ currencies = {
         "PGK" : (_(u"Papua New Guinea Kina"), u""),
         "PHP" : (_(u"Phillipine Peso"), u"Php"),
         "PKR" : (_(u"Pakistan Rupee"), u"\u20a8"),
-        "PLN" : (_(u"Polish Z\u0142oty"), u"z\u0142"),
+        "PLN" : (_(u"Polish Zloty"), u"z\u0142"),
         "PYG" : (_(u"Paraguay Guarani"), u"Gs"),
         "QAR" : (_(u"Qatari Riyal"), u"\ufdfc"),
         "RON" : (_(u"Romanian Leu"), u""),
