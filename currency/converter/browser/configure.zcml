@@ -4,6 +4,12 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="currency.converter">
 
+  <!-- Resource directory for images -->
+  <browser:resourceDirectory
+    name="currency.converter.images"
+    directory="images"
+    />
+
   <!-- Register pages -->
   <browser:page
     for="Products.CMFCore.interfaces.ISiteRoot"
