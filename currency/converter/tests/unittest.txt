@@ -67,8 +67,10 @@ Check Methods with currency data.
     ['AUD', 'BGN', 'BRL', 'CAD', 'CHF', 'CNY', 'CZK', 'DKK', 'EEK', 'EUR', 'GBP', 'HKD', 'HRK', 'HUF', 'IDR', 'ISK', 'JPY', 'KRW', 'LTL', 'LVL', 'MXN', 'MYR', 'NOK', 'NZD', 'PHP', 'PLN', 'RON', 'RUB', 'SEK', 'SGD', 'SKK', 'THB', 'TRY', 'USD', 'ZAR']
     >>> currency_data.updated_date()
     '2008-08-15'
-    >>> currency_data.currency_codes()
-    ['EUR', 'USD', 'EEK', 'IDR', 'BGN', 'ISK', 'GBP', 'DKK', 'SKK', 'CAD', 'JPY', 'HUF', 'RON', 'MYR', 'SEK', 'SGD', 'HKD', 'AUD', 'CHF', 'KRW', 'CNY', 'TRY', 'HRK', 'NZD', 'LVL', 'THB', 'LTL', 'NOK', 'RUB', 'MXN', 'CZK', 'BRL', 'PLN', 'PHP', 'ZAR']
+    >>> cd = currency_data.currency_codes()
+    >>> cd.sort()
+    >>> cd
+    ['AUD', 'BGN', 'BRL', 'CAD', 'CHF', 'CNY', 'CZK', 'DKK', 'EEK', 'EUR', 'GBP', 'HKD', 'HRK', 'HUF', 'IDR', 'ISK', 'JPY', 'KRW', 'LTL', 'LVL', 'MXN', 'MYR', 'NOK', 'NZD', 'PHP', 'PLN', 'RON', 'RUB', 'SEK', 'SGD', 'SKK', 'THB', 'TRY', 'USD', 'ZAR']
     >>> currency_data.currency_code_data().has_key('USD')
     True
     >>> currency_data.currency_code_tuples()[1]
