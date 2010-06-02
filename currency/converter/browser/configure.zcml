@@ -27,7 +27,7 @@
     />
 
   <browser:page
-    for="Products.CMFCore.interfaces.ISiteRoot"
+    for="*"
     name="currency-converter"
     class=".currency_converter.CurrencyConverterView"
     permission="zope2.View"

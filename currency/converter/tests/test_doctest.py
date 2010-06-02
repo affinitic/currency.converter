@@ -1,7 +1,7 @@
 import os
 import unittest
 import doctest
-from zope.testing import doctestunit
+from doctest import DocFileSuite
 from zope.component import testing
 from Testing import ZopeTestCase as ztc
 from Products.CMFCore.utils import getToolByName
@@ -35,7 +35,7 @@ def test_suite():
             optionflags=doctest.REPORT_ONLY_FIRST_FAILURE | doctest.NORMALIZE_WHITESPACE | doctest.ELLIPSIS),
 
         # Unit tests
-        doctestunit.DocFileSuite(
+        DocFileSuite(
             'tests/unittest.txt', package='currency.converter',
             setUp=testing.setUp, tearDown=testing.tearDown,
             optionflags=doctest.REPORT_ONLY_FIRST_FAILURE | doctest.NORMALIZE_WHITESPACE | doctest.ELLIPSIS),
