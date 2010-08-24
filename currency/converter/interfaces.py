@@ -53,6 +53,10 @@ class IRateAgainstBaseRate(Interface):
     def __call__(base_currency_rate, base_currency_code, currency_code):
         """Returns currency rate for base currency rate, margin and days."""
 
+class ICurrencyCodeDecimal(Interface):
+    def __call__():
+        """A component which provides dictionary of {code:decimal}."""
+
 class ICurrencyCodeName(Interface):
     def __call__():
         """Returns list of dictionaries for currency code and name."""
@@ -60,3 +64,18 @@ class ICurrencyCodeName(Interface):
 class ICurrencyCodeNameTuples(Interface):
     def __call__():
         """Returns tuple of tuples for currency code and name."""
+
+class IPortalCurrency(Interface):
+
+    def portal_currency_code():
+        """Returns default currency code of portal."""
+
+    def member_currency_code(proprety_name):
+        """Returns member's currency code."""
+
+    def selected_currency_code(session_key):
+        """Returns selected currency code from session."""
+
+class IDecimalPrice(Interface):
+    def __call__(price):
+        """Returns decimal price like 10.05 for 10.0445"""

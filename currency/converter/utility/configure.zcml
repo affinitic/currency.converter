@@ -6,4 +6,6 @@
       component=".vocabulary.CurrencyVocabularyFactory"
       name="currency.converter.CurrencyCodeName"
       />
+  <utility factory=".price.DecimalPrice" />
+  <utility factory=".currencies.CurrencyCodeDecimal" />
 </configure>

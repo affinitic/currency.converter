@@ -154,3 +154,42 @@ Utility tests
     True
     >>> eur.title
     u'Euro'
+
+CurrencyCodeDecimal
+----
+    >>> from currency.converter.utility.currencies import CurrencyCodeDecimal
+    >>> currency_code_decimal = CurrencyCodeDecimal()
+    >>> from currency.converter.interfaces import ICurrencyCodeDecimal
+    >>> ICurrencyCodeDecimal.providedBy(currency_code_decimal)
+    True
+    >>> provideUtility(currency_code_decimal, provides=ICurrencyCodeDecimal)
+    >>> ccd = getUtility(ICurrencyCodeDecimal)()
+    >>> ccd.get('EUR')
+    2
+    >>> ccd.get('JPY')
+    0
+
+
+DecimalPrice
+----
+    >>> from currency.converter.utility.price import DecimalPrice
+    >>> decimal_price = DecimalPrice()
+    >>> from currency.converter.interfaces import IDecimalPrice
+    >>> IDecimalPrice.providedBy(decimal_price)
+    True
+    >>> provideUtility(decimal_price, provides=IDecimalPrice)
+    >>> dp = getUtility(IDecimalPrice)
+    >>> dp(1.00, 2)
+    Decimal('1.00')
+    >>> dp(1.00, 1)
+    1 is not valid number. Use either 0 or 2.
+    >>> dp(1.00, 0)
+    Decimal('1')
+    >>> dp(1.0045, 2)
+    Decimal('1.01')
+    >>> dp(1.045, 0)
+    Decimal('1')
+    >>> dp(1.4, 0)
+    Decimal('1')
+    >>> dp(1.45, 0)
+    Decimal('2')

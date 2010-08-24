@@ -1,6 +1,11 @@
 Changelog
 ===========
 
+0.5.4 (2010-08-24)
+------------------
+* Added IPortalCurrency to adapt currency to portal.
+* Tested with Plone-4.0rc1.
+
 0.5.3 (2010-06-03)
 ------------------
 * currency-converter view updated.

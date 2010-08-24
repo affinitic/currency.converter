@@ -252,13 +252,32 @@ class RateAgainstBaseRate(object):
         days = currency_data.selected_days
         margin = currency_data.margin
         currency_dictionary = currency_data.currency_rate_against_base_code_with_margin(days, base_currency_code, margin)
+#        if currency_code == None:
+#            return None
+#        if currency_code == '':
+#            return None
+#        elif base_currency_code != currency_code:
+#            result = currency_dictionary[currency_code] * base_currency_rate
+#            return '%.2f' %result
+#        else:
+#            return None
+        if self.in_float(base_currency_rate, base_currency_code, currency_code) is not None:
+            result = currency_dictionary[currency_code] * base_currency_rate
+            return '%.2f' %result
+        else:
+            return None
+
+    def in_float(self, base_currency_rate, base_currency_code, currency_code):
+        currency_data = getUtility(ICurrencyData)
+        days = currency_data.selected_days
+        margin = currency_data.margin
+        currency_dictionary = currency_data.currency_rate_against_base_code_with_margin(days, base_currency_code, margin)
         if currency_code == None:
             return None
         if currency_code == '':
             return None
         elif base_currency_code != currency_code:
-            result = currency_dictionary[currency_code] * base_currency_rate
-            return '%.2f' %result
+            return currency_dictionary[currency_code] * base_currency_rate
         else:
             return None
 
