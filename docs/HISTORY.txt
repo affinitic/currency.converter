@@ -1,6 +1,10 @@
 Changelog
 ===========
 
+0.5.5 (2010-08-25)
+------------------
+* Path to sample-90d.xml fixed for test.
+
 0.5.4 (2010-08-24)
 ------------------
 * Added IPortalCurrency to adapt currency to portal.

@@ -17,13 +17,17 @@ class CurrencyConverterIntegrationTestCase(base.CurrencyConverterTestCase):
         ## Set up sessioning objects
         ztc.utils.setupCoreSessions(self.app)
         portal = self.portal
-        tail = ['currency.converter', 'currency', 'converter', 'tests', 'sample-90d.xml']
-        current_path_list = os.path.dirname(__file__).split('/')
-        ind = current_path_list.index('src')
-        path_list = current_path_list[:1+ind]
-        path_list.extend(tail)
-        path = '/'.join(path_list)
-        xml_url = 'file://' + path
+#        tail = ['currency.converter', 'currency', 'converter', 'tests', 'sample-90d.xml']
+#        current_path_list = os.path.dirname(__file__).split('/')
+#        ind = current_path_list.index('src')
+#        path_list = current_path_list[:1+ind]
+#        path_list.extend(tail)
+#        path = '/'.join(path_list)
+#        xml_url = 'file://' + path
+#        properties = getToolByName(portal, 'portal_properties')
+#        properties.currency_converter_properties.currency_xml = xml_url
+        xml = os.path.join(os.path.dirname(__file__), 'sample-90d.xml')
+        xml_url = 'file://' + xml
         properties = getToolByName(portal, 'portal_properties')
         properties.currency_converter_properties.currency_xml = xml_url
 
