@@ -1,7 +1,7 @@
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 #from Acquisition import aq_inner
-from zope.app.component.hooks import getSite
+from zope.component.hooks import getSite
 from Products.CMFCore.utils import getToolByName
 from currency.converter import CurrencyConverterMessageFactory as _
 #from zope.component import getMultiAdapter
